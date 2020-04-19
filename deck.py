@@ -1,4 +1,5 @@
 import random
+import pprint
 
 class Card():
 
@@ -46,6 +47,7 @@ class Deck():
 
     def __init__(self):
         self.deck = []
+        self.dealt = []
         suit = 0
         for c in range(5):
             for x in range(2,15):
@@ -58,7 +60,6 @@ class Deck():
             print(str(c.suit) + " " + str(c.value))
 
     def deal(self):
-        self.dealt = []
         num = random.randint(0, 52)
         while self.dealt.count(num) > 0:
             num = random.randint(0,52)
@@ -93,3 +94,7 @@ class Hand():
 
     def empty_hand(self):
         self.cards.clear()
+
+    def dprint(self):
+        for card in self.cards:
+            print(f"{card.get_suit()} {card.get_face()}")
