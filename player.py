@@ -8,11 +8,11 @@ class Player():
 
     #checks if player has enough to place bet, returns -1 if he doesnt
     def bet(self, amount):
-        if self.money < amount:
-            return -1
+        if self.money < amount or amount < 1:
+            return False
         else:
             self.money = self.money - amount
-            return amount
+            return True
 
     #returns amount of money the player has
     def wallet(self):

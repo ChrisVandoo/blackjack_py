@@ -97,4 +97,4 @@ class Hand():
 
     def dprint(self):
         for card in self.cards:
-            print(f"{card.get_suit()} {card.get_face()}")
+            print(f"{card.get_face()}-{card.get_suit()},", end=" ")
