@@ -11,7 +11,6 @@ class Player():
         if self.money < amount or amount < 1:
             return False
         else:
-            self.money = self.money - amount
             return True
 
     #returns amount of money the player has
@@ -30,3 +29,6 @@ class Player():
     #removes all cards from the players hand
     def clear_hand(self):
         self.hand.empty_hand()
+    
+    def value(self):
+        return self.hand.calc_value()

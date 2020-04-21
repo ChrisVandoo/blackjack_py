@@ -49,7 +49,7 @@ class Deck():
         self.deck = []
         self.dealt = []
         suit = 0
-        for c in range(5):
+        for c in range(4):
             for x in range(2,15):
                 card = Card(suit, x)
                 self.deck.append(card)
@@ -60,9 +60,9 @@ class Deck():
             print(str(c.suit) + " " + str(c.value))
 
     def deal(self):
-        num = random.randint(0, 52)
+        num = random.randint(0, 51)
         while self.dealt.count(num) > 0:
-            num = random.randint(0,52)
+            num = random.randint(0,51)
 
         self.dealt.append(num)
         return self.deck[num]
@@ -88,9 +88,25 @@ class Hand():
     
     def calc_value(self):
         count = 0
+        ace = self.has_ace()
+
         for card in self.cards:
             count = count + card.value
+        
+        #if going to bust, counts ace as 1 instead of 11
+        if count > 21 and ace is True:
+            count = count - 10
+
         return count
+
+    #checks if hand has an ace
+    def has_ace(self):
+        ace = False
+        for card in self.cards:
+            if card.value == 11:
+                ace = True 
+
+        return ace
 
     def empty_hand(self):
         self.cards.clear()
