@@ -39,6 +39,9 @@ class Card():
         else:
             return str(self.type)
     
+    def print_card(self):
+        return f"{self.get_face()}-{self.get_suit()}"
+    
 #this class simulates a deck of cards
 #creates a deck containing 52 unique cards
 #deal deals a unique card up to 52 times
@@ -46,14 +49,10 @@ class Card():
 class Deck():
 
     def __init__(self):
-        self.deck = []
+        #a fun list comprehesion 
+        self.deck = [Card(suit, type)
+                     for suit in range(4) for type in range(2, 15)]
         self.dealt = []
-        suit = 0
-        for c in range(4):
-            for x in range(2,15):
-                card = Card(suit, x)
-                self.deck.append(card)
-            suit += 1 
 
     def debug_print(self):
         for c in self.deck:
@@ -61,7 +60,11 @@ class Deck():
 
     def deal(self):
         num = random.randint(0, 51)
-        while self.dealt.count(num) > 0:
+
+        while num in self.dealt:
+            #if the entire deck is dealt out, shuffles the deck automatically
+            if len(self.dealt) > 51:
+                self.shuffle()
             num = random.randint(0,51)
 
         self.dealt.append(num)
